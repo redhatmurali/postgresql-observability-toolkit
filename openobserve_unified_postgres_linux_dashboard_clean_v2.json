@@ -1,0 +1,4876 @@
+{
+  "version": 5,
+  "dashboardId": "1791745952107",
+  "title": "PostgreSQL + Linux | Clean Interactive Monitoring",
+  "description": "Clean time-series dashboard. All time-series metrics use line/bar charts rather than gauges, preventing one gauge per timestamp. Four tabs: Overview, PostgreSQL, Linux Server, Exporter & Runtime.",
+  "role": "",
+  "owner": "",
+  "created": "2026-10-11T19:12:23.772641+00:00",
+  "tabs": [
+    {
+      "tabId": "overview",
+      "name": "Overview",
+      "panels": [
+        {
+          "id": "Panel_Unified_001",
+          "type": "line",
+          "title": "PostgreSQL exporter health",
+          "description": "0 = healthy; 1 = scrape error",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_exporter_last_scrape_error\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_exporter_last_scrape_error",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Exporter scrape status",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#16A34A",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Exporter scrape status",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 1,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_002",
+          "type": "line",
+          "title": "PostgreSQL active connections",
+          "description": "Current backend connection metric",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_activity_count\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_activity_count",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Active connections",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#2563EB",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Active connections",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 2,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_003",
+          "type": "line",
+          "title": "Transactions committed",
+          "description": "Cumulative commit counter; rising means activity",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_xact_commit\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_xact_commit",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Committed transactions",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#7C3AED",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Committed transactions",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 3,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_004",
+          "type": "bar",
+          "title": "Deadlocks",
+          "description": "Cumulative deadlock counter; increases indicate deadlocks",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_deadlocks\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_deadlocks",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Deadlocks",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DC2626",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Deadlocks",
+                "layer_type": "bar",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 4,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_006",
+          "type": "line",
+          "title": "Longest transaction",
+          "description": "Longest transaction duration in seconds",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_activity_max_tx_duration\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_activity_max_tx_duration",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Longest transaction",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#D97706",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Longest transaction",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 5,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_005",
+          "type": "line",
+          "title": "Database size",
+          "description": "Database size in bytes",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_database_size_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_database_size_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Database size",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0891B2",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Database size",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 6,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        }
+      ]
+    },
+    {
+      "tabId": "postgresql",
+      "name": "PostgreSQL",
+      "panels": [
+        {
+          "id": "Panel_Unified_007",
+          "type": "line",
+          "title": "PostgreSQL up",
+          "description": "1 = up; 0 = down (if emitted by exporter)",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_up\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_up",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "PostgreSQL up",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#16A34A",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "PostgreSQL up",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 7,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_008",
+          "type": "line",
+          "title": "Active connections",
+          "description": "Backend connections",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_activity_count\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_activity_count",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Active connections",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#2563EB",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Active connections",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 8,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_009",
+          "type": "line",
+          "title": "Transactions committed",
+          "description": "Cumulative commit counter",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_xact_commit\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_xact_commit",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Committed transactions",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#7C3AED",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Committed transactions",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 9,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_010",
+          "type": "line",
+          "title": "Transactions rolled back",
+          "description": "Cumulative rollback counter",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_xact_rollback\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_xact_rollback",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Rolled-back transactions",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DB2777",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Rolled-back transactions",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 10,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_011",
+          "type": "line",
+          "title": "Shared buffer hits",
+          "description": "Cumulative shared-buffer hit counter; not a percentage",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_blks_hit\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_blks_hit",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Shared buffer hits",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#059669",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Shared buffer hits",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 11,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_012",
+          "type": "line",
+          "title": "Blocks read from storage",
+          "description": "Cumulative blocks read counter",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_blks_read\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_blks_read",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Blocks read",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0E7490",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Blocks read",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 12,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_013",
+          "type": "bar",
+          "title": "Deadlocks",
+          "description": "Cumulative deadlock counter",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_deadlocks\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_deadlocks",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Deadlocks",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DC2626",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Deadlocks",
+                "layer_type": "bar",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 13,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_014",
+          "type": "line",
+          "title": "Locks by mode/type",
+          "description": "Lock count metric",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_locks_count\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_locks_count",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Lock count",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#4F46E5",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Lock count",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 14,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_015",
+          "type": "line",
+          "title": "Database size",
+          "description": "Database size in bytes",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_database_size_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_database_size_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Database size",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0891B2",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Database size",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 15,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_016",
+          "type": "line",
+          "title": "Temporary bytes written",
+          "description": "Cumulative temporary bytes written",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_database_temp_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_database_temp_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Temporary bytes",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#EA580C",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Temporary bytes",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 16,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_017",
+          "type": "line",
+          "title": "Query calls",
+          "description": "Cumulative query calls when pg_stat_statements metrics are available",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_statements_calls_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_statements_calls_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Query calls",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0284C7",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Query calls",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 17,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_018",
+          "type": "line",
+          "title": "Query execution time",
+          "description": "Cumulative execution time when available",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_stat_statements_seconds_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_stat_statements_seconds_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Query execution time",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#C026D3",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Query execution time",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 18,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_019",
+          "type": "line",
+          "title": "WAL size",
+          "description": "WAL size in bytes if this metric is emitted",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_wal_size_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_wal_size_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "WAL size",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#65A30D",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "WAL size",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 20,
+            "w": 8,
+            "h": 5,
+            "i": 19,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_020",
+          "type": "line",
+          "title": "Replication status",
+          "description": "Replication metric if emitted by the configured exporter",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_replication_is_replica\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_replication_is_replica",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Replication status",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#9333EA",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Replication status",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 20,
+            "w": 8,
+            "h": 5,
+            "i": 20,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        }
+      ]
+    },
+    {
+      "tabId": "linux_server",
+      "name": "Linux Server",
+      "panels": [
+        {
+          "id": "Panel_Unified_021",
+          "type": "line",
+          "title": "CPU time by mode",
+          "description": "CPU time counter by CPU and mode",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_cpu_seconds_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_cpu_seconds_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "CPU time",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#2563EB",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "CPU time",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 21,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_022",
+          "type": "line",
+          "title": "Memory available",
+          "description": "Available memory in bytes",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_memory_MemAvailable_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_memory_MemAvailable_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Available memory",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#16A34A",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Available memory",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 22,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_023",
+          "type": "line",
+          "title": "Memory total",
+          "description": "Total physical memory in bytes",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_memory_MemTotal_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_memory_MemTotal_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Total memory",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0891B2",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Total memory",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 23,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_024",
+          "type": "line",
+          "title": "Filesystem available",
+          "description": "Available filesystem bytes; filter mountpoint in panel editor",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_filesystem_avail_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_filesystem_avail_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Filesystem available",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#7C3AED",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Filesystem available",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 24,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_025",
+          "type": "line",
+          "title": "Filesystem size",
+          "description": "Filesystem capacity in bytes",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_filesystem_size_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_filesystem_size_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Filesystem size",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DB2777",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Filesystem size",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 25,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_026",
+          "type": "line",
+          "title": "Network received bytes",
+          "description": "Cumulative received bytes by interface",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_network_receive_bytes_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_network_receive_bytes_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Network received bytes",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0E7490",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Network received bytes",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 26,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_027",
+          "type": "line",
+          "title": "Network transmitted bytes",
+          "description": "Cumulative transmitted bytes by interface",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_network_transmit_bytes_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_network_transmit_bytes_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Network transmitted bytes",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#EA580C",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Network transmitted bytes",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 27,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_028",
+          "type": "line",
+          "title": "Disk read bytes",
+          "description": "Cumulative disk bytes read",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_disk_read_bytes_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_disk_read_bytes_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Disk read bytes",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#4F46E5",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Disk read bytes",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 28,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_029",
+          "type": "line",
+          "title": "Disk written bytes",
+          "description": "Cumulative disk bytes written",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_disk_written_bytes_total\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_disk_written_bytes_total",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Disk written bytes",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DC2626",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Disk written bytes",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 29,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_030",
+          "type": "line",
+          "title": "System load 1 minute",
+          "description": "One-minute system load",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_load1\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_load1",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Load 1m",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#CA8A04",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Load 1m",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 30,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_031",
+          "type": "line",
+          "title": "System load 5 minutes",
+          "description": "Five-minute system load",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_load5\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_load5",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Load 5m",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#9333EA",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Load 5m",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 31,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_032",
+          "type": "line",
+          "title": "System load 15 minutes",
+          "description": "Fifteen-minute system load",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_load15\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_load15",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Load 15m",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#059669",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Load 15m",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 15,
+            "w": 8,
+            "h": 5,
+            "i": 32,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        }
+      ]
+    },
+    {
+      "tabId": "exporter_runtime",
+      "name": "Exporter & Runtime",
+      "panels": [
+        {
+          "id": "Panel_Unified_033",
+          "type": "line",
+          "title": "Postgres exporter scrape error",
+          "description": "0 = healthy; 1 = scrape error",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"pg_exporter_last_scrape_error\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "pg_exporter_last_scrape_error",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Exporter scrape error",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#16A34A",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Exporter scrape error",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 33,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_034",
+          "type": "line",
+          "title": "Exporter up",
+          "description": "1 = scrape target reachable; 0 = unavailable if `up` is emitted",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"up\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "up",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Target up",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#2563EB",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Target up",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 34,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_035",
+          "type": "line",
+          "title": "Go goroutines",
+          "description": "Go runtime goroutines",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"go_goroutines\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "go_goroutines",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Goroutines",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#7C3AED",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Goroutines",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 0,
+            "w": 8,
+            "h": 5,
+            "i": 35,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_036",
+          "type": "line",
+          "title": "Go heap in use",
+          "description": "Go heap bytes currently in use",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"go_memstats_heap_inuse_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "go_memstats_heap_inuse_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Heap in use",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#0891B2",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Heap in use",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 36,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_037",
+          "type": "line",
+          "title": "Go GC duration count",
+          "description": "Cumulative GC observation count",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"go_gc_duration_seconds_count\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "go_gc_duration_seconds_count",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "GC observations",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#DB2777",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "GC observations",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 8,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 37,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_038",
+          "type": "line",
+          "title": "Process resident memory",
+          "description": "Process resident memory in bytes if emitted",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"process_resident_memory_bytes\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "process_resident_memory_bytes",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Resident memory",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#EA580C",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Resident memory",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 16,
+            "y": 5,
+            "w": 8,
+            "h": 5,
+            "i": 38,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        },
+        {
+          "id": "Panel_Unified_039",
+          "type": "line",
+          "title": "Node exporter scrape errors",
+          "description": "Collector success indicator; check labels/metric availability",
+          "config": {
+            "show_legends": true,
+            "legends_position": null,
+            "unit": "numbers",
+            "decimals": 2,
+            "line_thickness": 1.5,
+            "step_value": "0",
+            "top_results_others": false,
+            "axis_border_show": false,
+            "label_option": {
+              "rotate": 0
+            },
+            "show_symbol": false,
+            "line_interpolation": "smooth",
+            "legend_width": {
+              "unit": "px"
+            },
+            "base_map": {
+              "type": "osm"
+            },
+            "map_type": {
+              "type": "world"
+            },
+            "map_view": {
+              "zoom": 1,
+              "lat": 0,
+              "lng": 0
+            },
+            "map_symbol_style": {
+              "size": "by Value",
+              "size_by_value": {
+                "min": 1,
+                "max": 100
+              },
+              "size_fixed": 2
+            },
+            "drilldown": [],
+            "mark_line": [],
+            "override_config": [],
+            "connect_nulls": false,
+            "no_value_replacement": "",
+            "wrap_table_cells": false,
+            "table_transpose": false,
+            "table_dynamic_columns": false,
+            "color": {
+              "mode": "palette-classic-by-series",
+              "fixedColor": [
+                "#53ca53"
+              ],
+              "seriesBy": "last"
+            },
+            "trellis": {
+              "layout": null,
+              "num_of_columns": 1
+            }
+          },
+          "queryType": "sql",
+          "queries": [
+            {
+              "query": "SELECT histogram(_timestamp) AS \"x_axis_1\", max(value) AS \"y_axis_1\" FROM \"node_scrape_collector_success\" GROUP BY x_axis_1 ORDER BY x_axis_1",
+              "vrlFunctionQuery": "",
+              "customQuery": false,
+              "fields": {
+                "stream": "node_scrape_collector_success",
+                "stream_type": "metrics",
+                "x": [
+                  {
+                    "label": "Time",
+                    "alias": "x_axis_1",
+                    "column": "_timestamp",
+                    "color": null,
+                    "aggregationFunction": "histogram",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "y": [
+                  {
+                    "label": "Collector success",
+                    "alias": "y_axis_1",
+                    "column": "value",
+                    "color": "#4F46E5",
+                    "aggregationFunction": "max",
+                    "sortBy": "ASC",
+                    "isDerived": false,
+                    "havingConditions": []
+                  }
+                ],
+                "z": [],
+                "breakdown": [],
+                "filter": {
+                  "filterType": "group",
+                  "logicalOperator": "AND",
+                  "conditions": []
+                }
+              },
+              "config": {
+                "promql_legend": "Collector success",
+                "layer_type": "line",
+                "weight_fixed": 2,
+                "limit": 0,
+                "time_shift": [],
+                "line_thickness": 2,
+                "show_symbol": false
+              }
+            }
+          ],
+          "layout": {
+            "x": 0,
+            "y": 10,
+            "w": 8,
+            "h": 5,
+            "i": 39,
+            "moved": false
+          },
+          "htmlContent": "",
+          "markdownContent": ""
+        }
+      ]
+    }
+  ],
+  "variables": [],
+  "defaultDatetimeDuration": {
+    "type": "relative",
+    "period": "15m"
+  }
+}
