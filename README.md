@@ -1,85 +1,208 @@
 # PostgreSQL Observability Toolkit
 
-A Bash-based installation toolkit for deploying PostgreSQL monitoring and performance-analysis components on AlmaLinux 9 and compatible RHEL-family Linux distributions.
+A collection of installation scripts and dashboards for monitoring
+PostgreSQL and Linux system health on **AlmaLinux 9**. The repository
+brings together PostgreSQL metrics, system metrics, and OpenObserve
+dashboards to help DBAs inspect performance and troubleshoot problems
+from a central interface.
 
-## Features
+> **Important:** Review the installation script before running it on a
+> production server. The script may install packages, create services
+> and users, modify configuration files, and change firewall or database
+> settings.
 
-- **PostgreSQL installation:** Select a supported PostgreSQL major version during installation.
-- **Query performance analysis:** Use `pg_stat_statements` to identify expensive SQL statements.
-- **Metrics collection:** Use `postgres_exporter` to expose PostgreSQL performance metrics.
-- **Telemetry collection:** Use Grafana Alloy to collect and forward supported metrics and logs.
-- **Centralized observability:** Integrate with OpenObserve for dashboards, searching, and alerting.
-- **Log analysis:** Use pgBadger to analyze PostgreSQL logs and investigate performance problems.
-- **Service management:** Configure systemd services for supported components.
+## Repository
 
-## Supported platforms
+GitHub:
+<https://github.com/redhatmurali/postgresql-observability-toolkit>
 
-- AlmaLinux 9.x and compatible RHEL-family distributions.
-- PostgreSQL major versions supported by the selected installer and configured repositories.
+Clone the repository:
 
-## Requirements
-
-- Root or sudo privileges.
-- Internet connectivity for package and software downloads.
-- Sufficient disk space and memory for the selected components.
-- A PostgreSQL-compatible repository for the selected major version.
-
-## Installation
-
-Download `install_pg_observability_alma9.sh` from this repository.
-
-Make the script executable:
-
-```bash
-chmod +x install_pg_observability_alma9.sh
+``` bash
+git clone https://github.com/redhatmurali/postgresql-observability-toolkit.git
+cd postgresql-observability-toolkit
 ```
 
-Run the installer:
+## What's included
 
-```bash
-sudo ./install_pg_observability_alma9.sh
+  -----------------------------------------------------------------------------------------
+  File                                                  Purpose
+  ----------------------------------------------------- -----------------------------------
+  `install_pg_observability_alma9_fixed_v2.sh`          Main installation script for the
+                                                        AlmaLinux 9 PostgreSQL
+                                                        observability stack
+
+  `openobserve_postgresql_9_key_metrics_dashboard...`   OpenObserve dashboard focused on
+                                                        key PostgreSQL metrics
+
+  `openobserve_postgresql_pgBadger_dashboard...`        OpenObserve dashboard for
+                                                        PostgreSQL/pgBadger-related views
+
+  `openobserve_system_metrics_detailed_dashboard...`    Detailed Linux system metrics
+                                                        dashboard
+
+  `openobserve_unified_postgres_linux_dashboard...`     Unified PostgreSQL and Linux
+                                                        monitoring dashboard
+  -----------------------------------------------------------------------------------------
+
+Dashboard filenames above are shortened to match the names shown in the
+repository listing. Use `ls -1` to see the exact filenames in your
+checkout.
+
+## Intended environment
+
+-   Operating system: AlmaLinux 9
+-   Database: PostgreSQL 16, as configured by the installation script
+-   Observability: PostgreSQL metrics and Linux system metrics
+-   Visualization: OpenObserve dashboards supplied in this repository
+
+The exact services, ports, credentials, firewall rules, and supported
+configurations depend on the current version of the installation script.
+Check the script before deployment rather than assuming default values.
+
+## Quick installation
+
+Run as `root` or with equivalent `sudo` privileges.
+
+### 1. Download the project
+
+``` bash
+git clone https://github.com/redhatmurali/postgresql-observability-toolkit.git
+cd postgresql-observability-toolkit
 ```
 
-If supported by your script, select a PostgreSQL version using a command-line option:
+### 2. Inspect the installer
 
-```bash
-sudo ./install_pg_observability_alma9.sh --postgres-version 17
+``` bash
+less install_pg_observability_alma9_fixed_v2.sh
 ```
 
-Check the script's help output for the exact supported options:
+Check the script's configuration variables, repositories, service ports,
+credentials, and firewall changes before executing it.
 
-```bash
-./install_pg_observability_alma9.sh --help
+### 3. Run the installer
+
+``` bash
+chmod +x install_pg_observability_alma9_fixed_v2.sh
+sudo ./install_pg_observability_alma9_fixed_v2.sh
 ```
 
-## Components
+Follow the messages printed by the installer. If installation fails,
+save the complete terminal output and inspect the relevant service logs
+before rerunning it.
 
-| Component | Purpose |
-|---|---|
-| PostgreSQL | Relational database server |
-| pg_stat_statements | SQL execution statistics |
-| postgres_exporter | PostgreSQL metrics endpoint |
-| Grafana Alloy | Telemetry collection and forwarding |
-| OpenObserve | Centralized logs, metrics, and alerting |
-| pgBadger | PostgreSQL log analysis |
+### Download only the installation script
 
-## Security considerations
+If you do not want to clone the whole repository, download the script
+directly:
 
-- Keep monitoring endpoints private unless remote access is explicitly required.
-- Use dedicated, least-privilege PostgreSQL monitoring credentials.
-- Configure strong OpenObserve administrator credentials.
-- Review firewall rules and service bindings before deployment.
-- Back up PostgreSQL configuration files before making changes.
-- Test the installation on a non-production server before production deployment.
+``` bash
+curl -fL "https://raw.githubusercontent.com/redhatmurali/postgresql-observability-toolkit/main/install_pg_observability_alma9_fixed_v2.sh" -o install_pg_observability_alma9_fixed_v2.sh
+chmod +x install_pg_observability_alma9_fixed_v2.sh
+sudo ./install_pg_observability_alma9_fixed_v2.sh
+```
 
-## Important notes
+## Importing dashboards into OpenObserve
 
-This toolkit is intended to assist with installation and observability. Monitoring does not automatically optimize SQL queries or database configuration.
+1.  Sign in to your OpenObserve instance.
+2.  Open the dashboard management/import area in the OpenObserve UI.
+3.  Select the relevant dashboard JSON file from the cloned repository.
+4.  Map or verify the required streams and fields if prompted.
+5.  Save the dashboard and confirm that data is arriving.
 
-Installing a different PostgreSQL major version does not migrate an existing database. Major-version upgrades require a separate migration plan.
+Dashboard imports may need adjustment if your stream names, field names,
+or data sources differ from those expected by the dashboard.
 
-The script's actual capabilities, supported options, and service names depend on the version committed to this repository. Review the script before executing it.
+## Verify the installation
 
-## License
+Use these commands to review running services and listening ports:
 
-MIT License — add a `LICENSE` file if you choose to distribute this project under the MIT License.
+``` bash
+systemctl --type=service --state=running
+ss -lntup
+```
+
+Check PostgreSQL status (the service name can vary by installation):
+
+``` bash
+systemctl --type=service | grep -i postgres
+```
+
+Check recent logs for a service that is not working:
+
+``` bash
+journalctl -u SERVICE_NAME -n 100 --no-pager
+```
+
+Replace `SERVICE_NAME` with the actual service unit name on your system.
+Use the installer output and service configuration to identify the
+correct units and URLs.
+
+## Security recommendations
+
+-   Do not expose PostgreSQL, OpenObserve, exporters, or monitoring
+    endpoints directly to the public internet.
+-   Restrict access with a firewall and, where appropriate, a VPN or
+    private network.
+-   Change any default or temporary passwords immediately.
+-   Use dedicated, least-privilege database credentials for monitoring
+    wherever the components support them.
+-   Review the install script before using it on a production server.
+-   Back up existing PostgreSQL and configuration data before making
+    changes.
+-   Avoid publishing credentials, tokens, internal addresses, or
+    unredacted logs in GitHub issues.
+
+## Troubleshooting
+
+### PostgreSQL initialization or package path errors
+
+Confirm which PostgreSQL packages and binaries are installed:
+
+``` bash
+rpm -qa | grep -i postgres
+command -v psql
+find /usr -name postgresql-setup -o -name initdb 2>/dev/null
+```
+
+Do not assume the generic `postgresql-setup` command exists when
+PostgreSQL is installed from the PostgreSQL Global Development Group
+(PGDG) repository. PGDG packages commonly use version-specific paths and
+service names. Use the paths and service units that match the packages
+actually installed.
+
+### Dashboard shows no data
+
+-   Confirm the relevant collector/exporter service is running.
+-   Verify that the metrics or logs are reaching OpenObserve.
+-   Check stream names, timestamps, and field names.
+-   Review the collector and OpenObserve logs.
+-   Confirm that the dashboard's selected time range includes recent
+    data.
+
+### Installer fails
+
+-   Copy the full error output.
+-   Check the corresponding service with
+    `systemctl status SERVICE_NAME --no-pager`.
+-   Review logs with `journalctl -u SERVICE_NAME -n 100 --no-pager`.
+-   Correct the underlying issue before rerunning the installer.
+
+## Contributing and support
+
+Issues and improvements are welcome through the repository's GitHub
+Issues page:
+
+<https://github.com/redhatmurali/postgresql-observability-toolkit/issues>
+
+When reporting a problem, include your OS version, PostgreSQL
+installation method/version, the command you ran, and relevant error
+output. Redact passwords, tokens, and sensitive infrastructure details.
+
+## Disclaimer
+
+This project is provided as-is for monitoring, learning, and
+troubleshooting. Review and test changes in a non-production environment
+before applying them to critical systems. The maintainers are not
+responsible for data loss, downtime, or security issues resulting from
+use of the scripts or dashboards.
